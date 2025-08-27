@@ -33,7 +33,7 @@ class Player {
         this.x = canvas.width / 2;
         this.y = canvas.height / 2;
         this.size = PLAYER_SIZE;
-        this.color = 'white';
+        this.color = '#00ffff'; // シアンに変更
     }
 
     draw() {
@@ -73,7 +73,7 @@ class Bullet {
         const dist = Math.sqrt(dx * dx + dy * dy);
         this.vx = (dx / dist) * bulletSpeed;
         this.vy = (dy / dist) * bulletSpeed;
-        this.color = 'red';
+        this.color = '#ff007f'; // マゼンタに変更
     }
 
     update() {
@@ -109,8 +109,8 @@ function startGame() {
     titleScreen.style.display = 'none';
     gameOverScreen.style.display = 'none';
     init();
-    lastTime = performance.now(); // performance.now() を使用
-    requestAnimationFrame(gameLoop); // 初回のループを開始
+    lastTime = performance.now();
+    requestAnimationFrame(gameLoop);
 }
 
 // ゲームオーバー
@@ -125,7 +125,7 @@ let lastTime = 0;
 function gameLoop(currentTime) {
     if (gameState !== 'playing') return;
 
-    // requestAnimationFrameから渡されるcurrentTimeを使用
+    // 時間の更新
     const deltaTime = (currentTime - lastTime) / 1000;
     timeSurvived += deltaTime;
     lastTime = currentTime;
@@ -158,9 +158,9 @@ function gameLoop(currentTime) {
     // プレイヤーの更新と描画
     if (invincibilityTime > 0) {
         invincibilityTime--;
-        player.color = invincibilityTime % 10 < 5 ? 'transparent' : 'white'; // 点滅
+        player.color = invincibilityTime % 10 < 5 ? 'transparent' : '#00ffff'; // 点滅時の色も変更
     } else {
-        player.color = 'white';
+        player.color = '#00ffff';
     }
     player.draw();
 
@@ -226,7 +226,7 @@ canvas.addEventListener('touchmove', (e) => {
         player.x = touch.clientX - rect.left;
         player.y = touch.clientY - rect.top;
     }
-}, { passive: false }); // スクロール防止のために passive: false を設定
+}, { passive: false });
 
 // ウィンドウのリサイズ
 window.addEventListener('resize', init);

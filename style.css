@@ -4,11 +4,11 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #333;
+    background-color: #1a1a2e; /* 背景色を変更 */
     color: white;
     font-family: sans-serif;
     overflow: hidden;
-    touch-action: none; /* タッチ操作でのスクロールを防止 */
+    touch-action: none;
 }
 
 #game-container {
@@ -36,7 +36,8 @@ canvas {
 }
 
 #timer {
-    font-size: 2em;
+    font-size: 3em; /* フォントサイズを大きく */
+    font-weight: bold; /* 文字を太く */
 }
 
 #hearts {
