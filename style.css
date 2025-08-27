@@ -1,0 +1,72 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #333;
+    color: white;
+    font-family: sans-serif;
+    overflow: hidden;
+    touch-action: none; /* タッチ操作でのスクロールを防止 */
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    background-color: #000;
+    border: 2px solid white;
+}
+
+#ui {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+#timer {
+    font-size: 2em;
+}
+
+#hearts {
+    font-size: 2em;
+}
+
+.screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+}
+
+.screen h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.screen button {
+    padding: 10px 20px;
+    font-size: 1.5em;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+#game-over-screen {
+    display: none;
+}

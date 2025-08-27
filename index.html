@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>避けるゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="ui">
+            <div id="timer">00:00</div>
+            <div id="hearts">
+                <span class="heart">❤️</span>
+                <span class="heart">❤️</span>
+                <span class="heart">❤️</span>
+            </div>
+        </div>
+        <div id="title-screen" class="screen">
+            <h1>避けるゲーム</h1>
+            <button id="startButton">スタート</button>
+        </div>
+        <div id="game-over-screen" class="screen">
+            <h1>ゲームオーバー</h1>
+            <p id="final-time"></p>
+            <button id="restartButton">もう一度</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
