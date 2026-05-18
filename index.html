@@ -4,10 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>避けるゲーム</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        html,
+        body {
+            background: #1a1a2e;
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            min-height: 100dvh;
+            min-height: -webkit-fill-available;
+            width: 100%;
+        }
+        #unity-bootstrap {
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: rgba(26, 26, 46, 0.96);
+            font-family: system-ui, sans-serif;
+            font-weight: 600;
+            color: #e0e0ff;
+        }
+        #unity-loading-bar {
+            width: min(320px, 86vw);
+            height: 12px;
+            border: 2px solid rgba(120, 140, 255, 0.45);
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.35);
+            overflow: hidden;
+        }
+        #unity-progress-bar-full {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #7c4dff, #536dfe);
+            transition: width 0.12s ease-out;
+        }
+        #unity-canvas {
+            position: fixed;
+            width: 1px;
+            height: 1px;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
-
     <div id="game-container">
         <canvas id="gameCanvas"></canvas>
         <div id="ui">
@@ -26,9 +77,45 @@
             <h1>ゲームオーバー</h1>
             <p id="final-time"></p>
             <button id="restartButton">もう一度</button>
+            <p id="ranking-send-status" class="ranking-send-status" hidden></p>
         </div>
     </div>
-    
-    <script src="script.js"></script>
+
+    <canvas id="unity-canvas" width="1" height="1" aria-hidden="true"></canvas>
+    <div id="unity-bootstrap">
+        <span>読み込み中…</span>
+        <div id="unity-loading-bar">
+            <div id="unity-progress-bar-full"></div>
+        </div>
+    </div>
+
+    <script src="Build/dodgegame.loader.js"></script>
+    <script>
+        var unityCanvas = document.getElementById("unity-canvas");
+        var bootstrap = document.getElementById("unity-bootstrap");
+        var progressBarFull = document.getElementById("unity-progress-bar-full");
+        var config = {
+            dataUrl: "Build/dodgegame.data.gz",
+            frameworkUrl: "Build/dodgegame.framework.js.gz",
+            codeUrl: "Build/dodgegame.wasm.gz",
+            companyName: "nec",
+            productName: "DodgeGame",
+            productVersion: "1.0.0"
+        };
+        createUnityInstance(unityCanvas, config, function (progress) {
+            if (progressBarFull) {
+                progressBarFull.style.width = (100 * progress) + "%";
+            }
+        })
+            .then(function (instance) {
+                window.unityInstance = instance;
+                if (bootstrap) {
+                    bootstrap.style.display = "none";
+                }
+            })
+            .catch(function (message) {
+                alert(message);
+            });
+    </script>
 </body>
 </html>
